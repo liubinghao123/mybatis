@@ -7,7 +7,14 @@
     <update id="updateUser" parameterType="com.hao.mybatis.User">
         update user set name = #{name} where id = #{id}
     </update>
-    <select id="selectUser" resultType="com.hao.mybatis.User" >
-    select * from user where id = #{id}
-  </select>
+    <select id="selectUser"  resultType="com.hao.mybatis.User" >
+        select * from user where id = #{id}
+      </select>
+    <select id="selectList" resultType="com.hao.mybatis.User">
+        select * from user where 1=1
+        <if test="id != null and id !=''">and id = #{id}</if>
+    </select>
+    <select id="selectListForRowBounds" resultType="com.hao.mybatis.User">
+        select * from user where 1=1
+    </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.hao.mybatis;
 
+import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -127,9 +129,6 @@ public class SimpleTest {
 
     @Test
     public  void updateUser(){
-
-    }
-    public static void main(String[] args){
         InputStream is = SimpleTest.class.getResourceAsStream("/mybatis-config.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
         SqlSession session = sqlSessionFactory.openSession();
@@ -138,6 +137,29 @@ public class SimpleTest {
         updateUser.setId(1);
         updateUser.setName("谢霆锋2");
         userMapper.updateUser(updateUser);
+        session.commit();
+    }
+    @Test
+    public void selectUserByPage(){
+        InputStream is = SimpleTest.class.getResourceAsStream("/mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        PageHelper.startPage(1,2);
+        User user = new User();
+        userMapper.selectList(user);
+        session.commit();
+    }
+
+    @Test
+    public void selectUserByPageForRowBounds(){
+        InputStream is = SimpleTest.class.getResourceAsStream("/mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        RowBounds rowBounds = new RowBounds(1,2);
+        User user = new User();
+        userMapper.selectListForRowBounds(user,rowBounds);
         session.commit();
     }
 }

@@ -5,11 +5,14 @@
 <configuration>
     <properties resource="db.properties"/>
     <settings>
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
         <setting name="cacheEnabled" value="true"/>
         <!--<setting name="localCacheScope" value="STATEMENT"/>-->
     </settings>
-
+    <plugins>
+        <!--<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>-->
+        <plugin interceptor="com.hao.mybatis.RowBoundsInterceptor"/>
+        <plugin interceptor="com.hao.mybatis.PreparedStatementLoggerInterceptor"/>
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>

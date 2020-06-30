@@ -30,7 +30,7 @@ public class Executor {
             List<User> users = new ArrayList<User>();
             while(rs.next()){
                 User user = new User();
-                user.setId(rs.getInt("id"));
+                user.setId(rs.getInt("id"));;
                 user.setName(rs.getString("name"));
                 user.setAge(rs.getInt("age"));
                 users.add(user);

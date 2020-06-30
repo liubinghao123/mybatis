@@ -34,6 +34,7 @@ public class Executor {
                 user.setName(rs.getString("name"));
                 user.setAge(rs.getInt("age"));
                 users.add(user);
+                System.out.println("my name is dev");
             }
             return (List<T>) users;
         } catch (Exception e) {
